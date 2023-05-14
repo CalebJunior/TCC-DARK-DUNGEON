@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name EnemyTemplate
 
+signal kill
+
 onready var texture: Sprite = get_node("Texture")
 onready var floor_ray: RayCast2D = get_node("FloorRay")
 onready var animation: AnimationPlayer = get_node("Animation")
@@ -16,6 +18,8 @@ export(int) var speed
 export (int) var gravity_speed
 export (int) var proximity_threshold
 export (int) var raycast_default_position
+
+export var floating_text = preload("res://scenes/env/floating_text.tscn")
 
 func _physics_process(delta: float)->void:
 	gravity(delta)
@@ -37,6 +41,7 @@ func move_behavior()->void:
 		if abs(distance.x) <= proximity_threshold:
 			velocity.x = 0
 			can_attack = true 
+			
 			
 		elif floor_colision() and not can_attack:
 			set_physics_process(true)
@@ -70,3 +75,19 @@ func verify_position () -> void :
 		elif direction < 0:
 			texture.flip_h = true
 			floor_ray.position.x = raycast_default_position #verificar se é necessário inverter essa linha com a de cima
+
+func kill_enemy () -> void:
+	animation.play("kill")
+	emit_signal("kill")
+	
+
+func spawn_floating_text(type_sign: String, type: String, value: int) -> void:
+	var text: FloatText = floating_text.instance()
+	text.rect_global_position = global_position
+	
+	text.type = type
+	text.value = value
+	text.type_sign = type_sign
+	
+	get_tree().root.call_deferred("add_child",text)
+	

@@ -29,14 +29,16 @@ export (int) var jump_speed
 
 ##esta processando toda a movimentação do jogo 
 func _physics_process(delta: float):
-	
+	if not on_hit:
+		action_env()
+
 	horizontal_movement_env()
 	vertical_movement_env()
-	action_env()
-	
+
 	gravity(delta)
-	velocity = move_and_slide(velocity,Vector2.UP)
+	velocity = move_and_slide(velocity, Vector2.UP)
 	player_sprite.animate(velocity)
+
 	
 
 
@@ -72,8 +74,6 @@ func attack () -> void:
 		can_track_input = true
 		player_sprite.normal_attack = true
 
-
-
 func crouch () -> void:
 	if Input.is_action_pressed("crouch") and is_on_floor() and not defending:
 		crouching = true
@@ -102,8 +102,9 @@ func gravity(delta: float) -> void:
 	if velocity.y >= player_gravity:
 		velocity.y = player_gravity
 		
-	
+func _exit_tree() -> void:
+	if dead == true:
+		return
+	data_management.data_dictionary.player_position = global_position 
+	data_management.save_data()
 
-	
-	
-	

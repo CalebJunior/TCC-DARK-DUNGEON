@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Definitivo_parado.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/player/Definitivo_morrendo.png" type="Texture" id=8]
 [ext_resource path="res://assets/player/Definitivo_atacando.png" type="Texture" id=9]
 [ext_resource path="res://assets/player/hit.png" type="Texture" id=10]
+[ext_resource path="res://scenes/env/floating_text.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=8]
 
@@ -170,6 +171,18 @@ tracks/12/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ NodePath("../Texture") ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("../Collision:disabled")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -729,6 +742,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.6 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("../AttackArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "jump"
@@ -864,6 +889,9 @@ tracks/4/keys = {
 "values": [ 1.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 6, 15.5 )
+
 [sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
@@ -920,9 +948,6 @@ tracks/1/keys = {
 "values": [ 0.8, 0.6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 6, 15.5 )
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 3
@@ -957,6 +982,10 @@ anims/jump = SubResource( 5 )
 anims/landing = SubResource( 6 )
 anims/run = SubResource( 3 )
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 0.5 )
+shape = SubResource( 7 )
+
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
 limit_top = 0
@@ -971,7 +1000,6 @@ collision_mask = 8
 shape = SubResource( 8 )
 
 [node name="WallRay" type="RayCast2D" parent="."]
-visible = false
 enabled = true
 cast_to = Vector2( 5.2, 0 )
 
@@ -986,8 +1014,9 @@ autoplay = "lightAnimation"
 anims/RESET = SubResource( 14 )
 anims/lightAnimation = SubResource( 15 )
 
-[node name="Stats" type="Node" parent="."]
+[node name="Stats" type="Node" parent="." groups=["stats"]]
 script = ExtResource( 5 )
+floating_text = ExtResource( 11 )
 player = NodePath("..")
 collision_area = NodePath("../CollisionArea")
 
@@ -999,10 +1028,6 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
-position = Vector2( -1, 0.5 )
-shape = SubResource( 7 )
-
-[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 0.5 )
 shape = SubResource( 7 )
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/env/ParallaxBackground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/floor.tres" type="TileSet" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/management/level.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Enemy/goblin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/env/enemy_spawmer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Interface/general/hud.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -45,12 +46,22 @@ tile_data = PoolIntArray( 720950, 0, 0, 720951, 0, 0, 720952, 0, 0, 720953, 0, 0
 [node name="CanvasModulate" parent="ParallaxBackground" instance=ExtResource( 6 )]
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 40, 132 )
+position = Vector2( 11, 144 )
 
 [node name="CanvasModulate" parent="." instance=ExtResource( 6 )]
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Goblin" parent="." instance=ExtResource( 8 )]
-position = Vector2( 306, 131 )
+[node name="Hud" parent="." instance=ExtResource( 9 )]
+
+[node name="Enemy" type="Node2D" parent="."]
+
+[node name="EnemySpawmer" parent="Enemy" instance=ExtResource( 8 )]
+position = Vector2( 159, 159 )
+enemies_list = [ [ "res://scenes/Enemy/goblin.tscn", -11.5, 1.0, 100.0 ] ]
+spawn_cooldown = 5.0
+enemy_ammount = 1
+left_gap_position = -144
+right_gap_position = 144
+can_respawn = true
