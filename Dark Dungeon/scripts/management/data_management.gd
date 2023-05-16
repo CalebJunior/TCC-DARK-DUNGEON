@@ -2,9 +2,10 @@ extends Node
 
 var save_path: String = "user://save.dat"
 var initial_position: Vector2 = Vector2(17,142)
-
+var moedas : int = 0
 var data_dictionary: Dictionary ={
-	"player_position": initial_position
+	"player_position": initial_position,
+	"moedas": moedas
 	
 }
 

@@ -11,6 +11,8 @@ onready var invencibility_timer : Timer = get_node("InvencibilityTimer")
 
 var shielding: bool = false
 
+var moeda: int = 0
+
 var base_health: int = 40
 var base_mana: int = 25
 var base_attack: int = 4
@@ -131,7 +133,8 @@ func spawn_floating_text(type_sign: String, type: String, value: int) -> void:
 	
 	get_tree().root.call_deferred("add_child",text)
 	
-	
+func update_moeda() -> void:
+	moeda += 1
 	
 #func _process(delta) -> void:
 #	if Input.is_action_just_pressed("crouch"):

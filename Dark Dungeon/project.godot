@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Area_Collision_Moeda",
+"language": "GDScript",
+"path": "res://scripts/moeda/colission_moeda.gd"
+}, {
 "base": "ParallaxBackground",
 "class": "Background",
 "language": "GDScript",
@@ -69,6 +74,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/management/level.gd"
 }, {
+"base": "Node2D",
+"class": "Moeda",
+"language": "GDScript",
+"path": "res://scripts/moeda/moeda.gd"
+}, {
+"base": "Sprite",
+"class": "MoedaSprite",
+"language": "GDScript",
+"path": "res://scripts/moeda/animation_moeda.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -85,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://scripts/player/Player_texture.gd"
 } ]
 _global_script_class_icons={
+"Area_Collision_Moeda": "",
 "Background": "",
 "BarContainer": "",
 "CollisionArea": "",
@@ -97,6 +113,8 @@ _global_script_class_icons={
 "Eye_texture": "",
 "FloatText": "",
 "Level": "",
+"Moeda": "",
+"MoedaSprite": "",
 "Player": "",
 "Player_Stats": "",
 "Player_texture": ""

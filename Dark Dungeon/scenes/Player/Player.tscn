@@ -953,7 +953,7 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource( 1 )
 player_gravity = 350
-speed = 75
+speed = 80
 jump_speed = -220
 
 [node name="Texture" type="Sprite" parent="."]
@@ -988,6 +988,7 @@ shape = SubResource( 7 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.5, 1.5 )
 limit_top = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -1004,6 +1005,8 @@ enabled = true
 cast_to = Vector2( 5.2, 0 )
 
 [node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -1, 1.00001 )
+scale = Vector2( 2.04297, 2.19271 )
 texture = ExtResource( 4 )
 texture_scale = 0.3
 color = Color( 1, 1, 2, 1 )
