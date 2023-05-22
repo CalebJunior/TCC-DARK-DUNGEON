@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/See You Again - Tyler, The Creator - 8 bit.mp3-fb0d5fb13452f9c9f0abb27228c0a619.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/See You Again - Tyler, The Creator - 8 bit.mp3"
+dest_files=[ "res://.import/See You Again - Tyler, The Creator - 8 bit.mp3-fb0d5fb13452f9c9f0abb27228c0a619.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

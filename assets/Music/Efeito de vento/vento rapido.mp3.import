@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/vento rapido.mp3-b7194f093b2bb230e626faf7b0d25802.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/Efeito de vento/vento rapido.mp3"
+dest_files=[ "res://.import/vento rapido.mp3-b7194f093b2bb230e626faf7b0d25802.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

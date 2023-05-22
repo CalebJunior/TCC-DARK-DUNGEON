@@ -1,11 +1,14 @@
 extends EnemyTexture
-class_name Goblin_texture
+class_name Eye_texture
 
-
+export (NodePath) onready var collision_area = get_node(collision_area) as Area2D 
+export (NodePath) onready var enemy_attack_area = get_node(enemy_attack_area) as Area2D 
+export(String) var i_am
 func animate (velocity: Vector2) -> void:
-	if enemy.can_hit or enemy.can_die:
+	if enemy.can_hit or enemy.can_die or enemy.can_attack:
 		action_behavior()
-	move_behavior(velocity)
+	else:
+		move_behavior(velocity)
 	
 
 func action_behavior () -> void:
@@ -15,8 +18,13 @@ func action_behavior () -> void:
 		enemy.can_attack = false
 		
 	elif enemy.can_hit:
+		
 		animation.play("hit")
 		enemy.can_attack = false
+		
+	elif enemy.can_attack:
+		animation.play("attack")
+
 func move_behavior(velocity: Vector2) -> void:
 	if velocity.x != 0:
 		animation.play("run")
@@ -24,11 +32,24 @@ func move_behavior(velocity: Vector2) -> void:
 		animation.play("idle")
 		
 		
-func on_animation_finished(anim_name: String) -> void:
+func _on_animation_finished(anim_name: String) -> void:
 	match anim_name:
 		"hit":
 			enemy.can_hit = false
 			enemy.set_physics_process(true)
 			
+			
 		"dead":
 			enemy.kill_enemy()
+			
+		"kill":
+			if i_am == "ice golen":
+# warning-ignore:return_value_discarded
+				get_tree().change_scene("res://scenes/env/initial_screen.tscn")
+			get_tree().call_group("stats","update_health","Increase",enemy_attack_area.damage)
+			enemy.queue_free()
+			
+		
+		"attack":
+			enemy.can_attack = false
+			

@@ -6,17 +6,27 @@ signal game_over
 export (NodePath) onready var animation = get_node(animation) as AnimationPlayer 
 export (NodePath) onready var player = get_node(player) as KinematicBody2D
 export (NodePath) onready var collision_attack = get_node(collision_attack) as CollisionShape2D
+var previous_state: String = ""
 
 
 var normal_attack : bool = false
 var shield_off : bool = false
 var crouching_off : bool = false
 var suffix: String = "_right"
+var hit_animation_played: bool = false
 
-func animate(direction : Vector2) -> void:
+
+
+func animate(direction: Vector2) -> void:
 	verify_position(direction)
-	if player.dead or player.on_hit:
-		hit_behavior()
+	if player.on_hit or player.dead:
+		if not hit_animation_played:
+			hit_behavior()
+			hit_animation_played = true
+		return
+	else:
+		hit_animation_played = false
+
 	if player.attacking or player.defending or player.crouching:
 		action_behavior()
 	elif direction.y != 0:
@@ -25,7 +35,7 @@ func animate(direction : Vector2) -> void:
 		animation.play("landing")
 	else:
 		horizontal_behavior(direction)
-	
+
 	
 func verify_position(direction : Vector2) -> void:
 	if direction.x > 0 :
@@ -35,11 +45,11 @@ func verify_position(direction : Vector2) -> void:
 		flip_h = true
 		suffix = "_left"
 		
-func hit_behavior()	->void:
+func hit_behavior() -> void:
 	player.set_physics_process(false)
-	collision_attack.set_deferred("disable",true)
+	collision_attack.set_deferred("disable", true)
 	if player.dead:
-		animation.play("dead")	
+		animation.play("dead")
 	elif player.on_hit:
 		animation.play("hit")
 		
@@ -50,7 +60,6 @@ func vertical_behavior (direction : Vector2) -> void :
 	elif direction.y < 0:
 		animation.play("jump")
 
-		
 func horizontal_behavior (direction : Vector2) -> void :
 	if direction.x != 0 :
 		animation.play("run")
@@ -69,31 +78,28 @@ func action_behavior() -> void:
 		animation.play("crouch")
 		crouching_off = false
 		
-func on_animation_finished(anim_name) -> void :
+func on_animation_finished(anim_name) -> void:
 	match anim_name:
 		"landing":
 			player.landing = false
-		
+
 		"attack_left":
 			normal_attack = false
 			player.attacking = false
-			
-			
+
 		"attack_right":
 			normal_attack = false
 			player.attacking = false
-			
+
 		"hit":
-			player.on_hit = false
-			player.set_physics_process(true)
-			
+			player.on_hit = false  
+			player.set_physics_process(true)  
+
 			if player.defending:
 				animation.play("shield")
-				
+
 			if player.crouching:
 				animation.play("crouch")
-		
+
 		"dead":
 			emit_signal("game_over")
-			
-

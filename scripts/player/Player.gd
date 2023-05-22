@@ -29,14 +29,17 @@ export (int) var jump_speed
 
 ##esta processando toda a movimentação do jogo 
 func _physics_process(delta: float):
-	
+	if not on_hit:
+		action_env()
+
 	horizontal_movement_env()
 	vertical_movement_env()
-	action_env()
-	
+
 	gravity(delta)
-	velocity = move_and_slide(velocity,Vector2.UP)
+	velocity = move_and_slide(velocity, Vector2.UP)
 	player_sprite.animate(velocity)
+	if global_position.y > 2200:
+		dead = true
 	
 
 
@@ -50,12 +53,17 @@ func horizontal_movement_env() -> void:
 	
 	
 func vertical_movement_env() -> void:
-	if is_on_floor():
-		jump_count = 0
 	
+	if is_on_floor():
+		
+		jump_count = 0
+		
 	if Input.is_action_just_pressed("ui_select") and jump_count < 2 and can_track_input and not attacking:
 		jump_count+=1
 		velocity.y = jump_speed
+		$Jumpsound.play()
+		
+	
 		
 func action_env() -> void :
 		attack()
@@ -65,14 +73,13 @@ func action_env() -> void :
 func attack () -> void:
 	var attack_condition: bool = not attacking and not crouching and not defending
 	if Input.is_action_just_pressed("attack") and attack_condition and is_on_floor():
+		$attacksound.play()
 		attacking = true
 		player_sprite.normal_attack = true
 	elif not attacking:
 		attacking = false
 		can_track_input = true
 		player_sprite.normal_attack = true
-
-
 
 func crouch () -> void:
 	if Input.is_action_pressed("crouch") and is_on_floor() and not defending:
@@ -102,8 +109,10 @@ func gravity(delta: float) -> void:
 	if velocity.y >= player_gravity:
 		velocity.y = player_gravity
 		
-	
-
-	
-	
-	
+func _exit_tree() -> void:
+	if dead == true:
+		return
+	data_management.data_dictionary.player_position = global_position 
+	data_management.data_dictionary.moedas = stats.moeda
+	data_management.data_dictionary.moedas_pegas = stats.moedas_pegas.duplicate(true)
+	data_management.save_data()

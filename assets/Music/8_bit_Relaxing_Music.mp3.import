@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/8_bit_Relaxing_Music.mp3-920d2b4c8fc604361ae2e69552e7001d.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/8_bit_Relaxing_Music.mp3"
+dest_files=[ "res://.import/8_bit_Relaxing_Music.mp3-920d2b4c8fc604361ae2e69552e7001d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

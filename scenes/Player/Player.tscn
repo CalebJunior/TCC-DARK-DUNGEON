@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Definitivo_parado.png" type="Texture" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://assets/player/Definitivo_morrendo.png" type="Texture" id=8]
 [ext_resource path="res://assets/player/Definitivo_atacando.png" type="Texture" id=9]
 [ext_resource path="res://assets/player/hit.png" type="Texture" id=10]
+[ext_resource path="res://scenes/env/floating_text.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/Music/Loneliness _8-bit Relaxing music.mp3" type="AudioStream" id=12]
+[ext_resource path="res://assets/Music/JUMP/jumping_1-6452.mp3" type="AudioStream" id=13]
+[ext_resource path="res://assets/Music/attack.mp3" type="AudioStream" id=14]
+[ext_resource path="res://assets/Music/Efeito de vento/vento rapido.mp3" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=8]
 
@@ -170,6 +175,18 @@ tracks/12/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ NodePath("../Texture") ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("../Collision:disabled")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -729,6 +746,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.6 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("../AttackArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "jump"
@@ -864,6 +893,9 @@ tracks/4/keys = {
 "values": [ 1.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 6, 15.5 )
+
 [sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
@@ -920,15 +952,12 @@ tracks/1/keys = {
 "values": [ 0.8, 0.6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 6, 15.5 )
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 1 )
 player_gravity = 350
-speed = 75
+speed = 80
 jump_speed = -220
 
 [node name="Texture" type="Sprite" parent="."]
@@ -957,8 +986,13 @@ anims/jump = SubResource( 5 )
 anims/landing = SubResource( 6 )
 anims/run = SubResource( 3 )
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 0.5 )
+shape = SubResource( 7 )
+
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.5, 1.5 )
 limit_top = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -971,11 +1005,12 @@ collision_mask = 8
 shape = SubResource( 8 )
 
 [node name="WallRay" type="RayCast2D" parent="."]
-visible = false
 enabled = true
 cast_to = Vector2( 5.2, 0 )
 
 [node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -1, 1.00001 )
+scale = Vector2( 2.04297, 2.19271 )
 texture = ExtResource( 4 )
 texture_scale = 0.3
 color = Color( 1, 1, 2, 1 )
@@ -986,8 +1021,9 @@ autoplay = "lightAnimation"
 anims/RESET = SubResource( 14 )
 anims/lightAnimation = SubResource( 15 )
 
-[node name="Stats" type="Node" parent="."]
+[node name="Stats" type="Node" parent="." groups=["stats"]]
 script = ExtResource( 5 )
+floating_text = ExtResource( 11 )
 player = NodePath("..")
 collision_area = NodePath("../CollisionArea")
 
@@ -1002,9 +1038,26 @@ collision_mask = 0
 position = Vector2( -1, 0.5 )
 shape = SubResource( 7 )
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 0.5 )
-shape = SubResource( 7 )
+[node name="ThemeMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+volume_db = -23.74
+autoplay = true
+
+[node name="Jumpsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+volume_db = -16.393
+pitch_scale = 2.32
+attenuation = 1.03526
+
+[node name="attacksound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+volume_db = -19.999
+
+[node name="ambiente" type="AudioStreamPlayer2D" parent="."]
+process_priority = 1
+stream = ExtResource( 15 )
+volume_db = -30.556
+autoplay = true
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="on_animation_finished"]
 [connection signal="timeout" from="Stats/InvencibilityTimer" to="Stats" method="_on_invencibility_timer_timeout"]

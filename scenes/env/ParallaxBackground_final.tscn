@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/tile/parallax_backgroud_2/background_glacial_mountains.png" type="Texture" id=4]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 384, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+scale = Vector2( 1.00521, 1.5 )
+texture = ExtResource( 4 )
+centered = false

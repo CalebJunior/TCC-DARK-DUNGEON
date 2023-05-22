@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Loneliness _8-bit Relaxing music.mp3-0f5e30fe4bc26edc2d68bae7c01be4df.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/Loneliness _8-bit Relaxing music.mp3"
+dest_files=[ "res://.import/Loneliness _8-bit Relaxing music.mp3-0f5e30fe4bc26edc2d68bae7c01be4df.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

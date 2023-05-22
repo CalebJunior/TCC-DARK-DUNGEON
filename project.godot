@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Area_Collision_Dano",
+"language": "GDScript",
+"path": "res://scripts/management/damage_title.gd"
+}, {
+"base": "Area2D",
+"class": "Area_Collision_Moeda",
+"language": "GDScript",
+"path": "res://scripts/moeda/colission_moeda.gd"
+}, {
 "base": "ParallaxBackground",
 "class": "Background",
 "language": "GDScript",
 "path": "res://scripts/Background.gd"
+}, {
+"base": "Control",
+"class": "BarContainer",
+"language": "GDScript",
+"path": "res://scripts/Interface/player/bar_container.gd"
 }, {
 "base": "Area2D",
 "class": "CollisionArea",
@@ -23,6 +38,21 @@ _global_script_classes=[ {
 "class": "DetectionArea",
 "language": "GDScript",
 "path": "res://scripts/enemy/detection_area.gd"
+}, {
+"base": "Area2D",
+"class": "EnemyAttackArea",
+"language": "GDScript",
+"path": "res://scripts/enemy/enemy_attack_area.gd"
+}, {
+"base": "Control",
+"class": "EnemyHealthBar",
+"language": "GDScript",
+"path": "res://scripts/enemy/enemy_bar.gd"
+}, {
+"base": "Node2D",
+"class": "EnemySpawner",
+"language": "GDScript",
+"path": "res://scripts/enemy_spawner.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "EnemyTemplate",
@@ -35,14 +65,29 @@ _global_script_classes=[ {
 "path": "res://scripts/enemy/enemy_texture.gd"
 }, {
 "base": "EnemyTexture",
-"class": "Goblin_texture",
+"class": "Eye_texture",
 "language": "GDScript",
 "path": "res://scripts/enemy/goblin/texture.gd"
+}, {
+"base": "Label",
+"class": "FloatText",
+"language": "GDScript",
+"path": "res://scripts/floating_text.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
 "path": "res://scripts/management/level.gd"
+}, {
+"base": "Node2D",
+"class": "Moeda",
+"language": "GDScript",
+"path": "res://scripts/moeda/moeda.gd"
+}, {
+"base": "Sprite",
+"class": "MoedaSprite",
+"language": "GDScript",
+"path": "res://scripts/moeda/animation_moeda.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -60,13 +105,22 @@ _global_script_classes=[ {
 "path": "res://scripts/player/Player_texture.gd"
 } ]
 _global_script_class_icons={
+"Area_Collision_Dano": "",
+"Area_Collision_Moeda": "",
 "Background": "",
+"BarContainer": "",
 "CollisionArea": "",
 "DetectionArea": "",
+"EnemyAttackArea": "",
+"EnemyHealthBar": "",
+"EnemySpawner": "",
 "EnemyTemplate": "",
 "EnemyTexture": "",
-"Goblin_texture": "",
+"Eye_texture": "",
+"FloatText": "",
 "Level": "",
+"Moeda": "",
+"MoedaSprite": "",
 "Player": "",
 "Player_Stats": "",
 "Player_texture": ""
@@ -75,7 +129,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Dark Dungeon"
+run/main_scene="res://scenes/env/initial_screen.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
+run/flush_stdout_on_print=true
 config/icon="res://icon.png"
+
+[autoload]
+
+data_management="*res://scripts/management/data_management.gd"
 
 [display]
 
