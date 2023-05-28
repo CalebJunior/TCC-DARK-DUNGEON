@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/personagem_morte.mp3-c809bbd7a5bb151d0d55614ca606301a.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/personagem_morte.mp3"
+dest_files=[ "res://.import/personagem_morte.mp3-c809bbd7a5bb151d0d55614ca606301a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

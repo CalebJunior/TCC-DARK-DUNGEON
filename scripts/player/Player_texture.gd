@@ -49,7 +49,11 @@ func hit_behavior() -> void:
 	player.set_physics_process(false)
 	collision_attack.set_deferred("disable", true)
 	if player.dead:
+		$deadsound.play()
+		OS.delay_msec(150)
+		$deadsound.stop()
 		animation.play("dead")
+		
 	elif player.on_hit:
 		animation.play("hit")
 		

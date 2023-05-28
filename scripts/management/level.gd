@@ -14,19 +14,19 @@ func _ready() -> void:
 	
 func on_game_over()->void:
 	data_management.data_dictionary.player_position = data_management.initial_position
-	data_management.data_dictionary.moedas = data_management.moedas
-	data_management.data_dictionary.moedas_pegas = []
+#	data_management.data_dictionary.moedas = data_management.moedas
+#	data_management.data_dictionary.moedas_pegas = []
 	data_management.save_data()
 
 	
 	var _reload:bool = get_tree().reload_current_scene()
 	
 	
-func _process(_delta):
-	print(stats.moeda)
-	if stats.moeda == 10:
-# warning-ignore:return_value_discarded
+func passar_fase()->void:
+		data_management.data_dictionary.player_position = Vector2(22,304)
+		data_management.save_data()
+		OS.delay_msec(300)
 		get_tree().change_scene("res://scenes/management/level_final.tscn")
-	pass
+
 	
 

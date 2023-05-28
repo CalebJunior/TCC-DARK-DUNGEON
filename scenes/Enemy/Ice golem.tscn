@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Enemy/enemy_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/enemy/goblin/texture.gd" type="Script" id=2]
 [ext_resource path="res://assets/enemy/Ice Golem/frost_guardian_free_192x128_SpriteSheet.png" type="Texture" id=3]
+[ext_resource path="res://assets/Music/mob.mp3" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36.9231, 46.1539 )
@@ -178,6 +179,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Animation:playback_speed")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "dead"
@@ -325,7 +338,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.75 ]
+"values": [ 1.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("EnemyAttackArea/Collision:disabled")
@@ -539,7 +552,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1.5 ]
+"values": [ 1.0 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Texture:flip_h")
@@ -576,9 +589,6 @@ visible = false
 position = Vector2( 1.53846, -1.53846 )
 shape = SubResource( 1 )
 
-[node name="DetectionArea" parent="." index="2"]
-visible = false
-
 [node name="Collision" parent="DetectionArea" index="0"]
 visible = false
 position = Vector2( 46.9231, -2.30769 )
@@ -586,7 +596,7 @@ shape = SubResource( 13 )
 
 [node name="CollisionArea" parent="." index="3"]
 visible = false
-health = 20
+health = 40
 invulnerability_timer = 1.0
 
 [node name="Collision" parent="CollisionArea" index="0"]
@@ -595,7 +605,7 @@ shape = SubResource( 14 )
 
 [node name="EnemyAttackArea" parent="." index="4"]
 visible = false
-damage = 12
+damage = 20
 invencibility_timer = 1.0
 
 [node name="Collision" parent="EnemyAttackArea" index="0"]
@@ -629,3 +639,8 @@ margin_left = -1.53849
 margin_top = -21.5384
 margin_right = 62.4615
 margin_bottom = -4.53843
+
+[node name="AudioMorte" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 4 )
+
+[connection signal="finished" from="AudioMorte" to="." method="_on_AudioMorte_finished"]

@@ -87,6 +87,8 @@ func update_health(type: String, value: int) -> void:
 				player.attacking = false
 				current_health -= value
 				spawn_floating_text("-", "Damage", value)
+				if current_health <= 0:
+					player.dead = true
 
 	get_tree().call_group("bar_container", "update_bar","health",current_health)
 

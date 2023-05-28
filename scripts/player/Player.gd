@@ -115,4 +115,5 @@ func _exit_tree() -> void:
 	data_management.data_dictionary.player_position = global_position 
 	data_management.data_dictionary.moedas = stats.moeda
 	data_management.data_dictionary.moedas_pegas = stats.moedas_pegas.duplicate(true)
+	data_management.data_dictionary.current_scene = get_tree().get_current_scene().get_path()
 	data_management.save_data()

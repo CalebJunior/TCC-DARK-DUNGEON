@@ -6,6 +6,7 @@ signal kill
 onready var texture: Sprite = get_node("Texture")
 onready var floor_ray: RayCast2D = get_node("FloorRay")
 onready var animation: AnimationPlayer = get_node("Animation")
+onready var audio: AudioStreamPlayer = get_node("AudioMorte")
 
 var can_die: bool = false
 var can_hit: bool = false
@@ -76,6 +77,17 @@ func verify_position () -> void :
 			texture.flip_h = true
 			floor_ray.position.x = raycast_default_position #verificar se é necessário inverter essa linha com a de cima
 
+
+
+func emitir_som_morte() -> void :
+	set_physics_process(false)
+	audio.play()
+	OS.delay_msec(150)
+	audio.stop()
+	audio.connect("finished", self, "_on_AudioMorte_finished")
+
+
+	
 func kill_enemy () -> void:
 	animation.play("kill")
 	emit_signal("kill")
@@ -92,3 +104,7 @@ func spawn_floating_text(type_sign: String, type: String, value: int) -> void:
 	
 	get_tree().root.call_deferred("add_child",text)
 	
+
+
+func _on_AudioMorte_finished():
+	kill_enemy()

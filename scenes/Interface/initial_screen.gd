@@ -1,5 +1,5 @@
 extends Control
-
+onready var current_scene: String
 onready var menu : Control = get_node("Menu")
 onready var button_container: VBoxContainer = menu.get_node("ButtonContainer")
 onready var continue_button: Button = button_container.get_node("Continue")
@@ -23,8 +23,11 @@ func on_button_pressed(button_name: String) -> void :
 			var _change_scene: bool = get_tree().change_scene("res://scenes/management/level.tscn")
 			data_management.delete_save()
 		"Continue":
-			var _change_scene: bool = get_tree().change_scene("res://scenes/management/level.tscn")
-			
+			data_management.load_data()
+			if data_management.data_dictionary.current_scene == '/root/Level':
+				var _change_scene: bool = get_tree().change_scene("res://scenes/management/level.tscn")
+			elif data_management.data_dictionary.current_scene == '/root/Level_final':
+				var _change_scene: bool = get_tree().change_scene("res://scenes/management/level_final.tscn")
 		"Quit":
 			get_tree().quit()
 

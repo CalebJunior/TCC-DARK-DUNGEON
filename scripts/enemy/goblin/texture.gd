@@ -40,12 +40,9 @@ func _on_animation_finished(anim_name: String) -> void:
 			
 			
 		"dead":
-			enemy.kill_enemy()
+			enemy.emitir_som_morte()
 			
 		"kill":
-			if i_am == "ice golen":
-# warning-ignore:return_value_discarded
-				get_tree().change_scene("res://scenes/env/initial_screen.tscn")
 			get_tree().call_group("stats","update_health","Increase",enemy_attack_area.damage)
 			enemy.queue_free()
 			
@@ -53,3 +50,6 @@ func _on_animation_finished(anim_name: String) -> void:
 		"attack":
 			enemy.can_attack = false
 			
+
+
+

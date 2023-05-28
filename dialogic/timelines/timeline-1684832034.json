@@ -1,0 +1,35 @@
+{
+	"events": [
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1684832062.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1684832062.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Bem-vindo(a) ao nosso emocionante jogo 2D!\nVocê está pronto para começar sua jornada? Prepare-se para uma experiência cheia de ação e aventura!\nPara mover seu personagem, use as teclas W, A, S e D. Explore mundos incríveis,percorra florestas geladas e sombrias\nPara realizar saltos, pressione a tecla de espaço.\nE, é claro, para derrotar seus inimigos, você precisará mostrar suas habilidades de combate! Basta clicar com o botão esquerdo do mouse para atacar.\nLembre-se de explorar cada canto do mapa, pois tesouros ocultos e segredos podem estar esperando por você.\nPrepare-se para uma aventura incrível! Vamos lá, herói, seu destino aguarda!"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1684832034.json",
+		"name": "Tutorial"
+	}
+}

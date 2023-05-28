@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Definitivo_parado.png" type="Texture" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/player/Definitivo_atacando.png" type="Texture" id=9]
 [ext_resource path="res://assets/player/hit.png" type="Texture" id=10]
 [ext_resource path="res://scenes/env/floating_text.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/Music/Loneliness _8-bit Relaxing music.mp3" type="AudioStream" id=12]
+[ext_resource path="res://assets/Music/personagem_morte.mp3" type="AudioStream" id=12]
 [ext_resource path="res://assets/Music/JUMP/jumping_1-6452.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/Music/attack.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/Music/Efeito de vento/vento rapido.mp3" type="AudioStream" id=15]
@@ -893,8 +893,8 @@ tracks/4/keys = {
 "values": [ 1.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 6, 15.5 )
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 10, 15.5 )
 
 [sub_resource type="Animation" id=14]
 length = 0.001
@@ -952,6 +952,9 @@ tracks/1/keys = {
 "values": [ 0.8, 0.6 ]
 }
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 6, 15.5 )
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 3
@@ -969,6 +972,9 @@ script = ExtResource( 3 )
 animation = NodePath("../Animation")
 player = NodePath("..")
 collision_attack = NodePath("../AttackArea/CollisionShape2D")
+
+[node name="deadsound" type="AudioStreamPlayer" parent="Texture"]
+stream = ExtResource( 12 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Texture")
@@ -988,7 +994,7 @@ anims/run = SubResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 0.5 )
-shape = SubResource( 7 )
+shape = SubResource( 18 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
@@ -1037,11 +1043,6 @@ collision_mask = 0
 [node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
 position = Vector2( -1, 0.5 )
 shape = SubResource( 7 )
-
-[node name="ThemeMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 12 )
-volume_db = -23.74
-autoplay = true
 
 [node name="Jumpsound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )

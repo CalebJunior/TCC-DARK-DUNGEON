@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Enemy/enemy_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/enemy/goblin/texture.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/enemy/Flying eye/Flight.png" type="Texture" id=4]
 [ext_resource path="res://assets/enemy/Flying eye/Take Hit.png" type="Texture" id=5]
 [ext_resource path="res://assets/enemy/Flying eye/Death.png" type="Texture" id=6]
+[ext_resource path="res://assets/Music/mob.mp3" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 20 )
@@ -168,6 +169,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Animation:playback_speed")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.5 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -520,6 +533,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ ExtResource( 4 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Animation:playback_speed")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [node name="flying_eye" instance=ExtResource( 1 )]
 scale = Vector2( 0.65, 0.65 )
@@ -535,6 +560,7 @@ hframes = 8
 script = ExtResource( 2 )
 collision_area = NodePath("")
 enemy_attack_area = NodePath("../EnemyAttackArea")
+i_am = ""
 
 [node name="Collision" parent="." index="1"]
 position = Vector2( 0, 7 )
@@ -585,3 +611,8 @@ margin_left = -32.3077
 margin_top = -29.2308
 margin_right = -32.3077
 margin_bottom = -29.2308
+
+[node name="AudioMorte" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 7 )
+
+[connection signal="finished" from="AudioMorte" to="." method="_on_AudioMorte_finished"]

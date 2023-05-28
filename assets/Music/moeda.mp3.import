@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/moeda.mp3-fb0f3c4a2e8170ba4f6d15988cc0c753.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/moeda.mp3"
+dest_files=[ "res://.import/moeda.mp3-fb0f3c4a2e8170ba4f6d15988cc0c753.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

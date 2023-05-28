@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RedStone128 - The Final Battle.mp3-d3d851f827f52c358db4aab2d8ff340a.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/RedStone128 - The Final Battle.mp3"
+dest_files=[ "res://.import/RedStone128 - The Final Battle.mp3-d3d851f827f52c358db4aab2d8ff340a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

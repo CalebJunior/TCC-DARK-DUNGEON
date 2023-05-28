@@ -12,9 +12,8 @@ func animate () -> void:
 	else:
 		animation.play("idle")
 
-
 func on_Animation_animation_finished(anim_name):
 	match anim_name:
 		"dead":
 			moeda.liberar_moeda()
-#
+
